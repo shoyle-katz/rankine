@@ -1,0 +1,20 @@
+One of my best lectures (for a different class) had the students create a version of Dark Sky’s temperature prediction methods (http://journal.darkskyapp.com/2012/how-dark-sky-calculates-temperature/).
+The code would showcase pulling pages from the internet, parsing it, and simple modeling (we’d skip the Voronoi stuff).
+I think that should demonstrate the benefits of a general purpose language like Python and code in general vs Excel, etc.
+To show off version control, perhaps the two of us could put together something like this on GitHub during January to illustrate collaboration.
+It’d take some hours to do a good job with it; do you have the time over Jan 13 to 28?
+(Michael Selik)
+
+That looks promising.
+The interpolation is something they will be interested in.
+We could add in a disk write as well.
+In your judgment, is introducing Matplotlib going to be a problem?
+
+So the basic program:
+-loads data from online
+-parses the data into a grid
+-interpolates smoothly using triangulation
+-outputs the triangulation into a grid
+-writes the grid to disk
+-illustrates Git collaboration
+
