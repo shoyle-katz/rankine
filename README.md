@@ -1,4 +1,5 @@
 rankine
 =======
 
-A code showcasing some principles of basic scientific data processing in Python for SWC at UIUC.
+A demonstration of some principles of scientific data processing in
+Python for Software Carpentry (SWC) at UIUC.
