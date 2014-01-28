@@ -1,6 +1,4 @@
 #!/usr/bin/env python3.3
-import matplotlib as mpl
-import matplotlib.pyplot as plt
 
 # Distance formula
 from math import sqrt
