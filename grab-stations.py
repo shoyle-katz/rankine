@@ -1,9 +1,15 @@
 #!/usr/bin/env python3.3
 import requests
+import argparse
 
-# Get latitude and longitude of stations.
-# http://www.nws.noaa.gov/mdl/gfslamp/docs/stations_info.shtml
+parser = argparse.ArgumentParser(description='''
+	Get weather forecast station locations.
+	Latitude and longitude of NOAA weather stations outputs as text.
+	Gathered from the NOAA website
+	(http://www.nws.noaa.gov/mdl/gfslamp/docs/stations_info.shtml).
+	Requires an internet connection.''')
 
+args = parser.parse_args()
 #   Load raw data as HTML string.
 r = requests.get('http://www.nws.noaa.gov/mdl/gfslamp/docs/stations_info.shtml')
 
