@@ -3,11 +3,11 @@ import requests
 import argparse
 
 parser = argparse.ArgumentParser(description='''
-	Get weather forecast station locations.
-	Latitude and longitude of NOAA weather stations outputs as text.
-	Gathered from the NOAA website
-	(http://www.nws.noaa.gov/mdl/gfslamp/docs/stations_info.shtml).
-	Requires an internet connection.''')
+    Get weather forecast station locations.
+    Latitude and longitude of NOAA weather stations outputs as text.
+    Gathered from the NOAA website
+    (http://www.nws.noaa.gov/mdl/gfslamp/docs/stations_info.shtml).
+    Requires an internet connection.''')
 
 args = parser.parse_args()
 #   Load raw data as HTML string.
@@ -42,4 +42,3 @@ for line in data.split('\n'):
         # skip rows with invalid data
         continue
     print("%s\t%+6.2f\t%+6.2f"%(stn, lon, lat))
-
