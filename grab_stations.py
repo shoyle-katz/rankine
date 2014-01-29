@@ -55,6 +55,7 @@ if __name__=='__main__':
     for line in data.splitlines():
         try:
             stn, lat, lon = parse_station_line(line)
-            args.outfile.write("%s\t%+6.2f\t%+6.2f\n"%(stn, lon, lat))
+            pretty = '{0}\t{1:+6.2f}\t{2:+6.2f}\n'.format(stn, lon, lat)
+            args.outfile.write(pretty)
         except ValueError:
             logging.warning('Could not parse line: {0}'.format(line))
