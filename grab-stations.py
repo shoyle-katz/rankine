@@ -16,21 +16,26 @@ def get_command_line_args():
                         default=sys.stdout, help=outfile_param_help)
     return parser.parse_args()
 
+def grab_website_text():
+    '''Get raw data as HTML string from the NOAA website.'''
+    url = 'http://www.nws.noaa.gov/mdl/gfslamp/docs/stations_info.shtml'
+    page = requests.get(url)
+    return page.text
+
+def extract_illinois_section(text):
+    '''Find Illinois data segment (in a PRE tag).
+    We know (from examination) that inside of the PRE block containing ' IL '
+    (with whitespace and case matching) we can find the IL station data.
+    This solution isn't robust, but it's good enough for practical cases.'''
+    il_start  = text.find(' IL ')
+    tag_start = text.rfind('PRE', il_start-200, il_start) # look backwards
+    tag_end   = text.find('PRE', il_start)
+    return text[tag_start+4:tag_end-2]
+
 if __name__=='__main__':
     args = get_command_line_args()
-    #   Load raw data as HTML string.
-    r = requests.get('http://www.nws.noaa.gov/mdl/gfslamp/docs/stations_info.shtml')
-
-    #   Find Illinois data segment (in a PRE tag).  We know (from examination) that
-    #   inside of the PRE block containing ' IL ' (with whitespace and case
-    #   matching) we can find the IL station data.  This solution isn't robust, but
-    #   it's good enough for practical cases.
-    il_start  = r.text.find(' IL ')
-    tag_start = r.text.rfind('PRE', il_start-200, il_start)
-    # The string.rfind() function looks backwards from an index.
-    tag_end   = r.text.find('PRE', il_start)
-    data = r.text[tag_start+4:tag_end-2]
-    #print(data)
+    text = grab_website_text()
+    data = extract_illinois_section(text)
 
     #   Extract latitude and longitude of stations.  We know the columns are fixed
     #   (which is both inconvenient and convenient).  In this case, we will simply
