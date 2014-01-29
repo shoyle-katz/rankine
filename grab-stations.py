@@ -1,14 +1,19 @@
 #!/usr/bin/env python3.3
 import requests
 import argparse
+import sys
 
 def get_command_line_args():
-    parser = argparse.ArgumentParser(description='''
-        Get weather forecast station locations.
+    script_desc = '''Get weather forecast station locations.
         Latitude and longitude of NOAA weather stations outputs as text.
         Gathered from the NOAA website
         (http://www.nws.noaa.gov/mdl/gfslamp/docs/stations_info.shtml).
-        Requires an internet connection.''')
+        Requires an internet connection.'''
+    outfile_param_help = '''The name of the file to write the station list to.
+        Defaults to stdout if no file specified.'''
+    parser = argparse.ArgumentParser(description=script_desc)
+    parser.add_argument('-o', '--outfile', type=argparse.FileType('w'),
+                        default=sys.stdout, help=outfile_param_help)
     return parser.parse_args()
 
 if __name__=='__main__':
@@ -44,4 +49,4 @@ if __name__=='__main__':
         except ValueError:
             # skip rows with invalid data
             continue
-        print("%s\t%+6.2f\t%+6.2f"%(stn, lon, lat))
+        args.outfile.write("%s\t%+6.2f\t%+6.2f\n"%(stn, lon, lat))
